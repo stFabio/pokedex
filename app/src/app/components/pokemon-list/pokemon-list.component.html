@@ -1,0 +1,45 @@
+<div class="pokemon-list-container">
+  <!-- Search Bar -->
+  <app-search-bar (searchChange)="onSearch($event)"></app-search-bar>
+
+  <!-- Loading State -->
+  <div *ngIf="loading && pokemonList.length === 0" class="loading">
+    <div class="pokeball-loader"></div>
+    <p>Loading Pokémon...</p>
+  </div>
+
+  <!-- Pokemon Grid -->
+  <div class="pokemon-grid" *ngIf="!loading || pokemonList.length > 0">
+    <app-pokemon-card
+      *ngFor="let pokemon of filteredPokemon"
+      [pokemon]="pokemon"
+      [isSelected]="selectedPokemon?.id === pokemon.id"
+      (cardClick)="selectPokemon($event)"
+    ></app-pokemon-card>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="filteredPokemon.length === 0 && !loading" class="no-results">
+    <p>😞 No Pokémon found matching "{{ searchQuery }}"</p>
+    <button (click)="clearSearch()" class="btn-secondary">Clear Search</button>
+  </div>
+
+  <!-- Load More Button -->
+  <div class="load-more-container" *ngIf="!searchQuery && hasMore && !loading">
+    <button (click)="loadMore()" class="btn-primary">
+      Load More Pokémon
+    </button>
+  </div>
+
+  <!-- Loading More Indicator -->
+  <div *ngIf="loadingMore" class="loading-more">
+    <div class="spinner"></div>
+    <p>Loading more Pokémon...</p>
+  </div>
+</div>
+
+<!-- Selected Pokemon Detail Panel -->
+<app-pokemon-detail
+  [pokemon]="selectedPokemon"
+  (close)="closeDetail()"
+></app-pokemon-detail>

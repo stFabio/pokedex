@@ -1,0 +1,10 @@
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="onSearchChange()"
+    placeholder="Search Pokémon by name..."
+    class="search-input"
+  />
+  <span class="search-icon">🔍</span>
+</div>

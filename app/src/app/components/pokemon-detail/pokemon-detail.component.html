@@ -1,0 +1,37 @@
+<div class="detail-panel" *ngIf="pokemon">
+  <div class="detail-overlay" (click)="onOverlayClick()"></div>
+  <div class="detail-content">
+    <button class="close-btn" (click)="onClose()">×</button>
+    
+    <div class="detail-header">
+      <h2>{{ pokemon.name | titlecase }}</h2>
+      <span class="detail-id">#{{ formatId(pokemon.id) }}</span>
+    </div>
+    
+    <img 
+      [src]="pokemon.imageUrl" 
+      [alt]="pokemon.name" 
+      class="detail-image" 
+    />
+    
+    <div class="detail-types" *ngIf="pokemon.types">
+      <span 
+        *ngFor="let type of pokemon.types" 
+        [class]="'type type-' + type"
+      >
+        {{ type }}
+      </span>
+    </div>
+    
+    <div class="detail-stats">
+      <div class="stat">
+        <span class="stat-label">Height</span>
+        <span class="stat-value">{{ formatHeight(pokemon.height!) }} m</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Weight</span>
+        <span class="stat-value">{{ formatWeight(pokemon.weight!) }} kg</span>
+      </div>
+    </div>
+  </div>
+</div>

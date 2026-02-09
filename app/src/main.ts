@@ -1,6 +1,9 @@
-import { platformBrowser } from '@angular/platform-browser';
-import { PokedexAppModule } from './app/pokedex-app.module';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
+import { AppComponent } from './app/pokedex-app.component';
 
-platformBrowser()
-  .bootstrapModule(PokedexAppModule)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideHttpClient()
+  ]
+}).catch(err => console.error(err));
